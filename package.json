@@ -1,5 +1,5 @@
 {
-  "name": "hoodie-plugin-template",
+  "name": "hoodie-plugin-debug",
   "version": "1.0.0",
   "description": "Basic Hoodie plugin layout",
   "main": "worker.js",
