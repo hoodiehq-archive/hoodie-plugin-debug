@@ -9,10 +9,8 @@ Hoodie.extend(function (hoodie) {
   'use strict';
 
   // extend the hoodie.js API
-  hoodie.hello = function (name) {
-    return hoodie.task.start('hello', {
-      name: name
-    });
+  hoodie.debug = function (obj) {
+    // send to /_api/_plugins/debug/_api/
+    // with Content-Type: application/json
   };
-
 });

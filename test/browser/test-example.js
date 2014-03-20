@@ -9,16 +9,9 @@ suite('example', function () {
     });
   });
 
-  test('say hello', function (done) {
+  test('post something', function (done) {
     this.timeout(10000);
-    var task = hoodie.hello('world');
-    task.fail(function (err) {
-      assert.ok(false, err.message);
-    });
-    task.done(function (doc) {
-      assert.equal(doc.msg, 'Hello, world');
-      done();
-    });
+    done();
   });
 
 });
