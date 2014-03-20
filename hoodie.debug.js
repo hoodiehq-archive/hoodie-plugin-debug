@@ -9,8 +9,47 @@ Hoodie.extend(function (hoodie) {
   'use strict';
 
   // extend the hoodie.js API
-  hoodie.debug = function (obj) {
-    // send to /_api/_plugins/debug/_api/
-    // with Content-Type: application/json
+  hoodie.debug = function debug(obj) {
+    if (! obj) return;
+
+    // debug promises
+    if (typeof obj.done === 'function') {
+      return obj.done(hoodie.debug);
+    }
+
+    if (obj.length && obj[0].createdAt) {
+      console.table(obj);
+    } else {
+      console.dir(obj);
+    }
   };
+
+  // send a dump of localStorage to the backend
+  hoodie.dump = function dump() {
+    var data = {};
+    var id = 'dump/' + Date.now();
+    try {
+      for (var key, value, i = 0; i < localStorage.length; i++) {
+        key = localStorage.key(i);
+        value = localStorage.getItem(key);
+        data[key] = value;
+        try {
+          data[key] = JSON.parse(value);
+        } catch (e) {}
+      }
+    } catch (e) {}
+
+    hoodie.request('POST', '/_plugins/debug/_api/', {
+      contentType: 'application/json',
+      data: JSON.stringify({
+        _id: id,
+        hoodieId: hoodie.id(),
+        username: hoodie.account.username,
+        data: data
+      })
+    });
+  };
+
+  // send to /_api/_plugins/debug/_api/
+  // with Content-Type: application/json
 });
