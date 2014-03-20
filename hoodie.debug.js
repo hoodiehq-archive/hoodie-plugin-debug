@@ -27,7 +27,7 @@ Hoodie.extend(function (hoodie) {
   // send a dump of localStorage to the backend
   hoodie.dump = function dump() {
     var data = {};
-    var id = 'dump/' + Date.now();
+    var id = hoodie.id() + '-' + Date.now();
     try {
       for (var key, value, i = 0; i < localStorage.length; i++) {
         key = localStorage.key(i);
@@ -42,7 +42,7 @@ Hoodie.extend(function (hoodie) {
     hoodie.request('POST', '/_plugins/debug/_api/', {
       contentType: 'application/json',
       data: JSON.stringify({
-        _id: id,
+        id: id,
         hoodieId: hoodie.id(),
         username: hoodie.account.username,
         data: data
