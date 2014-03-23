@@ -25,19 +25,21 @@ Hoodie.extend(function (hoodie) {
   };
 
   // send a dump of localStorage to the backend
-  hoodie.dump = function dump() {
-    var data = {};
+  hoodie.dump = function dump(data) {
     var id = hoodie.id() + '-' + Date.now();
-    try {
-      for (var key, value, i = 0; i < localStorage.length; i++) {
-        key = localStorage.key(i);
-        value = localStorage.getItem(key);
-        data[key] = value;
-        try {
-          data[key] = JSON.parse(value);
-        } catch (e) {}
-      }
-    } catch (e) {}
+
+    if (! data) {
+      try {
+        for (var key, value, i = 0; i < localStorage.length; i++) {
+          key = localStorage.key(i);
+          value = localStorage.getItem(key);
+          data[key] = value;
+          try {
+            data[key] = JSON.parse(value);
+          } catch (e) {}
+        }
+      } catch (e) {}
+    }
 
     hoodie.request('POST', '/_plugins/debug/_api/', {
       contentType: 'application/json',
