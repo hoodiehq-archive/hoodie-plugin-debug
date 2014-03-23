@@ -26,7 +26,9 @@ Hoodie.extend(function (hoodie) {
 
   // send a dump of localStorage to the backend
   hoodie.dump = function dump(data) {
-    var id = hoodie.id() + '-' + Date.now();
+    var date = new Date();
+    var timestamp = date.toISOString().replace(/[^\d]/g, '');
+    var id = hoodie.id() + '-' + timestamp;
 
     if (! data) {
       try {
