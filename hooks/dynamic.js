@@ -13,8 +13,9 @@ module.exports = function (hoodie) {
           console.log(request.payload);
           reply(JSON.stringify({'status': 'error', 'error': error}));
         }
-        return reply(JSON.stringify({'status': 'ok'}));
+        reply(JSON.stringify({'status': 'ok'}));
       });
+      return true;
     }
   };
 };
