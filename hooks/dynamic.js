@@ -3,7 +3,6 @@ module.exports = function (hoodie) {
 
   return {
     'server.api.plugin-request': function (request, reply) {
-      console.log('debug hook called');
 
       var plugin_db = hoodie.database(plugin_db_name);
       plugin_db.add('debug', request.payload, function (error) {
