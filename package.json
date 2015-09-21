@@ -5,7 +5,7 @@
   "main": "worker.js",
   "devDependencies": {
     "mocha": "~1.17.1",
-    "chai": "~1.9.0",
+    "chai": "3.3.0",
     "grunt": "^0.4.3",
     "grunt-shell": "^0.6.4",
     "grunt-mocha-browser": "0.0.4",
